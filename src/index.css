@@ -1,0 +1,22 @@
+.container {
+  width: 1300px;
+  margin: 0 auto;
+}
+a {
+  text-decoration: none;
+}
+
+input,
+select,
+textarea {
+  outline: none;
+}
+.app {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  min-height: 100vh;
+  footer{
+    margin-top: 0 auto;
+  }
+}
