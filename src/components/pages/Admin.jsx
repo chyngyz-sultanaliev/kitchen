@@ -26,6 +26,14 @@ const Admin = () => {
 
   const handleCreate = async (e) => {
     e.preventDefault();
+    if (
+      !name.trim() ||
+      !url.trim() ||
+      !price.trim() ||
+      !category.trim() ||
+      !des.trim()
+    )
+      return alert("Заполните все поля !");
     try {
       const res = await axios.post(
         "https://api-crud.elcho.dev/api/v1/3c7d6-27dc0-69f42/kitchen",
