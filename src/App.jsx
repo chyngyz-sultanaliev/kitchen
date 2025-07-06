@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import Header from "./components/layout/header";
+import Header from "./components/layout/Header";
 import White from "./assets/images/body.png";
 import Black from "./assets/images/blackDark.png";
-import Footer from "./components/layout/footer";
+import Footer from "./components/layout/Footer";
 import Main from "./components/pages/Main";
 import { Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
