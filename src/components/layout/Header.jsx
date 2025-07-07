@@ -43,7 +43,7 @@ const Header = () => {
             </div>
             <input
               type="search"
-              className="block w-full p-3 ps-10 text-sm text-gray-500 bg-[#FFEBCD] rounded-lg"
+              className="w-full p-3 ps-10 text-sm text-gray-500 bg-[#FFEBCD] rounded-lg"
               placeholder="Search..."
             />
             <button
@@ -80,7 +80,7 @@ const Header = () => {
       {modal && (
         <div
           onClick={() => setModal(!modal)}
-          className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] bg-[#000]/40 backdrop-blur-sm max-h-full"
+          className="fixed  z-50 flex justify-center items-center w-full inset-0 bg-[#000]/40 backdrop-blur-sm "
         >
           <div className="relative p-4 w-full max-w-md max-h-full">
             <div
@@ -113,7 +113,7 @@ const Header = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       id="text"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      className="block w-full py-3 pl-4 text-sm text-gray-500 bg-[#FFEBCD] rounded-lg"
                       placeholder="Name"
                     />
                   </div>
@@ -131,11 +131,11 @@ const Header = () => {
                       onChange={(e) => setPassword(e.target.value)}
                       id="password"
                       placeholder="••••••••"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      className="w-full p-3 pl-4 text-sm text-gray-500 bg-[#FFEBCD] rounded-lg"
                     />
                     <a
                       onClick={() => seteEye(!eye)}
-                      className="absolute top-9 right-3 text-2xl "
+                      className="absolute top-9 right-3 text-[#A0522D] text-2xl "
                     >
                       {eye ? <FaEye /> : <FaEyeSlash />}
                     </a>
@@ -143,7 +143,7 @@ const Header = () => {
 
                   <button
                     onClick={() => Login()}
-                    className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="w-full bg-[#D2691E] hover:bg-[#DEB887] focus:ring-4 focus:outline-none focus:ring-[#D2691E] font-medium rounded-lg text-sm px-4 py-2 "
                   >
                     Login to your admin
                   </button>
