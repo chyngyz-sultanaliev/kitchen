@@ -1,14 +1,33 @@
 import React from "react";
 import { BiMoon, BiSearch, BiSun } from "react-icons/bi";
-import { FaCartArrowDown, FaUser } from "react-icons/fa";
+import { FaCartArrowDown, FaEye, FaEyeSlash, FaUserLock } from "react-icons/fa";
 import Black from "../../assets/images/blackDark.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { IoCloseSharp } from "react-icons/io5";
+import { LiaDoorOpenSolid } from "react-icons/lia";
 
 const Header = () => {
+  const [modal, setModal] = useState(false);
+  const [eye, seteEye] = useState(false);
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const nav = useNavigate();
   const dark = useSelector((s) => s.dark);
   const Dispatch = useDispatch();
+  function Login() {
+    if (password === "admin123" || email === "admin") {
+      nav("/admin");
+      setModal(!modal);
+    } else {
+      alert("Такой пользователь не сущетвует!");
+      setEmail("");
+      setPassword("");
+    }
+  }
+
   return (
     <header className="p-6 bg-[#A0522D]/40 ">
       <div className="container  flex  gap-10  items-center text-[#F5FFFA] text-xl font-medium  ">
@@ -35,9 +54,15 @@ const Header = () => {
             </button>
           </div>
         </form>
-        <Link to={"/admin"}>
-          <FaUser />
-        </Link>
+        {!modal ? (
+          <a onClick={() => setModal(!modal)}>
+            <FaUserLock />
+          </a>
+        ) : (
+          <a onClick={() => setModal(!modal)}>
+            <LiaDoorOpenSolid />
+          </a>
+        )}
         <Link to={"/cart"}>
           <FaCartArrowDown />
         </Link>
@@ -51,6 +76,83 @@ const Header = () => {
           </a>
         )}
       </div>
+
+      {modal && (
+        <div
+          onClick={() => setModal(!modal)}
+          className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] bg-[#000]/40 backdrop-blur-sm max-h-full"
+        >
+          <div className="relative p-4 w-full max-w-md max-h-full">
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="relative  rounded-lg shadow-sm bg-[#A0522D]/40"
+            >
+              <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  Sign in to admin
+                </h3>
+                <button
+                  onClick={() => setModal(!modal)}
+                  className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-xl w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  <IoCloseSharp />
+                </button>
+              </div>
+              <div className="p-4 md:p-5">
+                <div className="space-y-4">
+                  <div>
+                    <label
+                      htmlFor="text"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      name="text"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      id="text"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      placeholder="Name"
+                    />
+                  </div>
+                  <div className="relative">
+                    <label
+                      htmlFor="password"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Your password
+                    </label>
+                    <input
+                      type={eye ? "text" : "password"}
+                      name="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      id="password"
+                      placeholder="••••••••"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    />
+                    <a
+                      onClick={() => seteEye(!eye)}
+                      className="absolute top-9 right-3 text-2xl "
+                    >
+                      {eye ? <FaEye /> : <FaEyeSlash />}
+                    </a>
+                  </div>
+
+                  <button
+                    onClick={() => Login()}
+                    className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    Login to your admin
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

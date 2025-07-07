@@ -13,39 +13,45 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Loading from "./components/ui/Loading";
 
+const routes = [
+  {
+    id: 1,
+    path: "/",
+    element: <Main />,
+  },
+  {
+    id: 2,
+    path: "/admin",
+    element: <Admin />,
+  },
+  {
+    id: 3,
+    path: "/cart",
+    element: <Main />,
+  },
+  {
+    id: 4,
+    path: "/category/:cat",
+    element: <Category />,
+  },
+];
 function App() {
-  const [loading, setLoading] = useState(true);
   const dark = useSelector((s) => s.dark);
-  const routes = [
-    {
-      id: 1,
-      path: "/",
-      element: <Main />,
-    },
-    {
-      id: 2,
-      path: "/admin",
-      element: <Admin />,
-    },
-    {
-      id: 3,
-      path: "/cart",
-      element: <Main />,
-    },
-    {
-      id: 4,
-      path: "/category/:cat",
-      element: <Category />,
-    },
-  ];
+const [loading, setLoading] = useState(() => {
+  return localStorage.getItem("alreadyLoaded") !== "true";
+});
 
-  useEffect(() => {
+useEffect(() => {
+  if (loading) {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 8000);
+      localStorage.setItem("alreadyLoaded", "true");
+    }, 8000); 
     return () => clearTimeout(timer);
-  }, []);
-  
+  }
+}, [loading]);
+
+
   if (loading) return <Loading />;
   return (
     <div
