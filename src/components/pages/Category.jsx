@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import ProductCard from "../ui/ProductCard";
 import axios from "axios";
+import Categories from "../ui/Categories";
 
 const Category = () => {
   const { cat } = useParams();
@@ -23,7 +24,7 @@ const Category = () => {
     dispatch(getProduct());
   }, [dispatch]);
   return (
-    <div className="container py-12">
+    <div className="container pb-6">
       <h1 className="text-xl text-left font-bold ">Category / {cat}</h1>
       <div className=" py-6 flex justify-center flex-wrap gap-10 items-center">
         {products.map((el) => {

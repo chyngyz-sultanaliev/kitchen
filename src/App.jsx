@@ -12,6 +12,8 @@ import Category from "./components/pages/Category";
 import { useState } from "react";
 import { useEffect } from "react";
 import Loading from "./components/ui/Loading";
+import Categories from "./components/ui/Categories";
+import Cart from "./components/pages/Cart";
 
 const routes = [
   {
@@ -27,7 +29,7 @@ const routes = [
   {
     id: 3,
     path: "/cart",
-    element: <Main />,
+    element: <Cart />,
   },
   {
     id: 4,
@@ -37,20 +39,19 @@ const routes = [
 ];
 function App() {
   const dark = useSelector((s) => s.dark);
-const [loading, setLoading] = useState(() => {
-  return localStorage.getItem("alreadyLoaded") !== "true";
-});
+  const [loading, setLoading] = useState(() => {
+    return localStorage.getItem("alreadyLoaded") !== "true";
+  });
 
-useEffect(() => {
-  if (loading) {
-    const timer = setTimeout(() => {
-      setLoading(false);
-      localStorage.setItem("alreadyLoaded", "true");
-    }, 8000); 
-    return () => clearTimeout(timer);
-  }
-}, [loading]);
-
+  useEffect(() => {
+    if (loading) {
+      const timer = setTimeout(() => {
+        setLoading(false);
+        localStorage.setItem("alreadyLoaded", "true");
+      }, 8000);
+      return () => clearTimeout(timer);
+    }
+  }, [loading]);
 
   if (loading) return <Loading />;
   return (
@@ -64,6 +65,7 @@ useEffect(() => {
       }}
     >
       <Header />
+      <Categories />
       <Routes>
         {routes.map((el) => (
           <Route path={el.path} element={el.element} key={el.id} />

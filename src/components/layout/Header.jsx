@@ -11,7 +11,7 @@ import { LiaDoorOpenSolid } from "react-icons/lia";
 
 const Header = () => {
   const [modal, setModal] = useState(false);
-  const [eye, seteEye] = useState(false);
+  const [eye, setEye] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const nav = useNavigate();
@@ -54,20 +54,14 @@ const Header = () => {
             </button>
           </div>
         </form>
-        {!modal ? (
-          <a onClick={() => setModal(!modal)}>
-            <FaUserLock />
-          </a>
-        ) : (
-          <a onClick={() => setModal(!modal)}>
-            <LiaDoorOpenSolid />
-          </a>
-        )}
+        <a onClick={() => setModal(!modal)}>
+          <FaUserLock />
+        </a>
         <Link to={"/cart"}>
           <FaCartArrowDown />
         </Link>
-        {!dark ? (
-          <a onClick={() => Dispatch({ type: "DARK_WHITE" })} href="#">
+        {dark ? (
+          <a onClick={() => Dispatch({ type: "DARK_WHITE" })}>
             <BiSun />
           </a>
         ) : (
@@ -134,7 +128,7 @@ const Header = () => {
                       className="w-full p-3 pl-4 text-sm text-gray-500 bg-[#FFEBCD] rounded-lg"
                     />
                     <a
-                      onClick={() => seteEye(!eye)}
+                      onClick={() => setEye(!eye)}
                       className="absolute top-9 right-3 text-[#A0522D] text-2xl "
                     >
                       {eye ? <FaEye /> : <FaEyeSlash />}
